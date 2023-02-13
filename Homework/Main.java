@@ -1,18 +1,16 @@
-package TaskOne;
+package Homework;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.*;
 
 public class Main {
     public static void main(String[] args) {
         List<String> names = List.of("Hanna", "Ivan", "Dmytro", "Anton", "Iryna", "Vasyl");
-
-        System.out.println(names.stream().map(String::length).collect(Collectors.toList()));
+        List<String> arrayList = List.of("1, 2, 0", "4, 5");
 
         System.out.println(getOddIndexNames(names));
         System.out.println(getNamesInUpperCase(names));
+        System.out.println(sortNumbersInStringList(arrayList));
     }
 
     public static List<String> getOddIndexNames(List<String> names) {
@@ -27,6 +25,14 @@ public class Main {
         return names.stream()
                 .map(String::toUpperCase)
                 .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> sortNumbersInStringList(List<String> list){
+        return list.stream()
+                .map(s -> List.of(s.split(", ")))
+                .flatMap(Collection::stream)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
