@@ -13,6 +13,11 @@ public class Main {
         System.out.println(sortNumbersInStringList(arrayList));
 
         Stream<Long> stream = myLinearCongruentGenerator(25214903917L, 11L, 2L,48, 100);
+
+        Stream<String> stream1 = names.stream();
+        Stream<String> stream2 = arrayList.stream();
+
+        System.out.println(zip(stream1, stream2).collect(Collectors.toList()));
     }
 
     //task 1
@@ -49,5 +54,15 @@ public class Main {
     }
 
     //task 5
+    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second){
+        List<T> result = new ArrayList<>();
+        Iterator<T> firstIterator = first.iterator();
+        Iterator<T> secondIterator = second.iterator();
+        while (firstIterator.hasNext() && secondIterator.hasNext()){
+            result.add(firstIterator.next());
+            result.add(secondIterator.next());
+        }
+        return result.stream();
+    }
 
 }
