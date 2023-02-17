@@ -11,8 +11,11 @@ public class Main {
         System.out.println(getOddIndexNames(names));
         System.out.println(getNamesInUpperCase(names));
         System.out.println(sortNumbersInStringList(arrayList));
+
+        Stream<Long> stream = myLinearCongruentGenerator(25214903917L, 11L, 2L,48, 100);
     }
 
+    //task 1
     public static List<String> getOddIndexNames(List<String> names) {
         return IntStream
                 .range(0, names.size())
@@ -21,6 +24,7 @@ public class Main {
                 .toList();
     }
 
+    //task 2
     public static List<String> getNamesInUpperCase(List<String> names) {
         return names.stream()
                 .map(String::toUpperCase)
@@ -28,12 +32,22 @@ public class Main {
                 .collect(Collectors.toList());
     }
 
-    public static List<String> sortNumbersInStringList(List<String> list){
+    //task 3
+    public static List<String> sortNumbersInStringList(List<String> list) {
         return list.stream()
                 .map(s -> List.of(s.split(", ")))
                 .flatMap(Collection::stream)
                 .sorted()
                 .collect(Collectors.toList());
     }
+
+    //task 4
+    public static Stream<Long> myLinearCongruentGenerator(long a, long c, long m, int inPower, int numbersLimit) {
+        Stream<Long> stream = Stream.iterate(1L, x -> (long) ((a * x + c) % Math.pow(m, inPower)));
+        stream.limit(numbersLimit).peek(System.out::println).collect(Collectors.toList());
+        return stream;
+    }
+
+    //task 5
 
 }
